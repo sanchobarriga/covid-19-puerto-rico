@@ -207,6 +207,40 @@
 
 
 <div class="section">
+    <h1>Tendencias por día de semana</h1>
+
+    <div id="WeekdayBias" class="chart"></div>
+    <script type="text/javascript">
+      embedChart('WeekdayBias', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Casos agrupados por la combinación de:</p>
+
+    <ul>
+        <li>Día de la semana que se tomó la muestra (o falleció el paciente);</li>
+        <li>Día de la semana del boletín en que se añadió el caso.</li>
+    </ul>
+
+    <p>La intensidad del color de cada cuadro refleja el promedio de cuántos casos
+        se registraron para esa combinación. Los histogramas marginales muestran
+        los promedios agrupados por la variable de un sólo eje.</p>
+
+    <p><b>ADVERTENCIA:</b> Los boletines siempre salen la mañana del día posterior al
+        que cuyos datos reportan. Así que por ejemplo:</p>
+    <ul>
+        <li>Cuando esta gráfica dice que las muertes se reportan desproporcionadamente
+            para boletín de sábado, esto quiere decir el boletín que se publica mañana
+            de domingo, que reporta datos registrados hasta el sábado;</li>
+        <li>Igualmente cuando dice que se reportan desproporcionadamente pocos resultados
+            de prueba molecular en boletín de martes, quiere decir el que se anuncia en
+            miércoles.</li>
+    </ul>
+</div>
+
+
+<div class="section">
     <h1>Curvas de casos acumulados por fecha de evento y de reporte</h1>
 
     <div id="Cumulative"></div>
