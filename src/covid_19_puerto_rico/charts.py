@@ -43,14 +43,14 @@ class AbstractChart(ABC):
 
     def filter_data(self, df, bulletin_date):
         """Filter dataframe according to given bulletin_date.  May want to override."""
-        return df.loc[df['bulletin_date'] == pd.to_datetime(bulletin_date)]
+        return df.loc[df['bulletin_date'] == pd.to_datetime(bulletin_date, utc=True)]
 
 
 
 class Cumulative(AbstractChart):
     def make_chart(self, df):
         return alt.Chart(df).mark_line(point=True).encode(
-            x=alt.X('yearmonthdate(datum_date):T', title=None,
+            x=alt.X('utcyearmonthdate(datum_date):T', title=None,
                     axis=alt.Axis(format='%d/%m')),
             y=alt.Y('value', title=None, scale=alt.Scale(type='log')),
             color=alt.Color('variable', title=None,
@@ -61,7 +61,7 @@ class Cumulative(AbstractChart):
                                   'Casos probables (fecha muestra)',
                                   'Muertes (fecha muerte)',
                                   'Muertes (fecha boletín)']),
-            tooltip=['datum_date', 'variable', 'value']
+            tooltip=['utcyearmonthdate(datum_date):T', 'variable', 'value']
         ).properties(
             width=575, height=275
         )
@@ -77,8 +77,7 @@ class Cumulative(AbstractChart):
                         table.c.announced_cases,
                         table.c.deaths,
                         table.c.announced_deaths])
-        df = pd.read_sql_query(query, connection,
-                               parse_dates=["bulletin_date", "datum_date"])
+        df = util.read_sql_query(query, connection, parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
             'confirmed_cases': 'Casos confirmados (fecha muestra)',
             'probable_cases': 'Casos probables (fecha muestra)',
@@ -93,7 +92,7 @@ class Cumulative(AbstractChart):
 class NewCases(AbstractChart):
     def make_chart(self, df):
         base = alt.Chart(df.dropna()).encode(
-            x=alt.X('yearmonthdate(datum_date):T', title=None,
+            x=alt.X('utcyearmonthdate(datum_date):T', title=None,
                     axis=alt.Axis(format='%d/%m'))
         )
 
@@ -103,7 +102,7 @@ class NewCases(AbstractChart):
             alt.datum.value > 0
         ).mark_point(opacity=0.5).encode(
             y=alt.Y('value:Q', title=None, scale=alt.Scale(type='log')),
-            tooltip=['datum_date', 'variable', 'value']
+            tooltip=['utcyearmonthdate(datum_date):T', 'variable', 'value']
         )
 
         average = base.transform_window(
@@ -131,8 +130,7 @@ class NewCases(AbstractChart):
                         table.c.confirmed_cases,
                         table.c.probable_cases,
                         table.c.deaths])
-        df = pd.read_sql_query(query, connection,
-                               parse_dates=["bulletin_date", "datum_date"])
+        df = util.read_sql_query(query, connection, parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
             'confirmed_cases': 'Confirmados',
             'probable_cases': 'Probables',
@@ -149,8 +147,7 @@ class AbstractLateness(AbstractChart):
                         table.c.probable_cases,
                         table.c.deaths]
         )
-        df = pd.read_sql_query(query, connection,
-                               parse_dates=["bulletin_date"])
+        df = util.read_sql_query(query, connection, parse_dates=["bulletin_date"])
         df = df.rename(columns={
             'confirmed_and_probable_cases': 'Confirmados y probables',
             'confirmed_cases': 'Confirmados',
@@ -160,8 +157,8 @@ class AbstractLateness(AbstractChart):
         return pd.melt(df, "bulletin_date")
 
     def filter_data(self, df, bulletin_date):
-        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=8))
-        until_date = pd.to_datetime(bulletin_date)
+        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=8), utc=True)
+        until_date = pd.to_datetime(bulletin_date, utc=True)
         return df.loc[(since_date < df['bulletin_date'])
                       & (df['bulletin_date'] <= until_date)]
 
@@ -177,7 +174,7 @@ class LatenessDaily(AbstractLateness):
             y=alt.Y('variable', title=None, sort=sort_order, axis=None),
             color=alt.Color('variable', sort=sort_order,
                             legend=alt.Legend(orient='bottom', title=None)),
-            tooltip=['variable', 'bulletin_date',
+            tooltip=['variable', 'utcyearmonthdate(bulletin_date):T',
                      alt.Tooltip(field='value',
                                  type='quantitative',
                                  format=".1f")]
@@ -197,7 +194,7 @@ class LatenessDaily(AbstractLateness):
             width=300,
         ).facet(
             columns=2,
-            facet=alt.Facet("bulletin_date", sort="descending", title="Fecha del boletín")
+            facet=alt.Facet("utcyearmonthdate(bulletin_date)", sort="descending", title="Fecha del boletín")
         )
 
 
@@ -217,12 +214,13 @@ class Lateness7Day(AbstractLateness):
             strokeWidth=3,
             point=alt.OverlayMarkDef(size=50)
         ).encode(
-            x=alt.X('yearmonthdate(bulletin_date):O',
+            x=alt.X('utcyearmonthdate(bulletin_date):O',
                     title="Fecha boletín",
-                    axis=alt.Axis(format='%d/%m', titlePadding=10)),
+                    axis=alt.Axis(format='%d/%m', titlePadding=10),
+                    scale=alt.Scale(type='utc')),
             y=alt.Y('value:Q', title="Rezago (días)"),
             color = alt.Color('variable', sort=sort_order, legend=None),
-            tooltip=['variable', 'bulletin_date',
+            tooltip=['variable', 'utcyearmonthdate(bulletin_date)',
                      alt.Tooltip(field='value',
                                  type='quantitative',
                                  format=".1f")]
@@ -253,7 +251,7 @@ class Lateness7Day(AbstractLateness):
 class Doubling(AbstractChart):
     def make_chart(self, df):
         return alt.Chart(df.dropna()).mark_line(clip=True).encode(
-            x=alt.X('datum_date:T',
+            x=alt.X('utcyearmonthdate(datum_date):T',
                     title='Fecha del evento',
                     axis=alt.Axis(format='%d/%m')),
             y=alt.Y('value', title=None,
@@ -283,8 +281,7 @@ class Doubling(AbstractChart):
                         table.c.cumulative_probable_cases,
                         table.c.cumulative_deaths]
         )
-        df = pd.read_sql_query(query, connection,
-                               parse_dates=["bulletin_date", "datum_date"])
+        df = util.read_sql_query(query, connection, parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
             'cumulative_confirmed_and_probable_cases': 'Confirmados y probables',
             'cumulative_confirmed_cases': 'Confirmados',
@@ -297,13 +294,13 @@ class Doubling(AbstractChart):
 class DailyDeltas(AbstractChart):
     def make_chart(self, df):
         base = alt.Chart(df).encode(
-            x=alt.X('yearmonthdate(datum_date):O',
+            x=alt.X('utcyearmonthdate(datum_date):O',
                     title="Fecha evento", sort="descending",
                     axis=alt.Axis(format='%d/%m')),
-            y=alt.Y('yearmonthdate(bulletin_date):O',
+            y=alt.Y('utcyearmonthdate(bulletin_date):O',
                     title="Fecha boletín", sort="descending",
                     axis=alt.Axis(format='%d/%m')),
-            tooltip=['bulletin_date:T', 'datum_date:T', 'value']
+            tooltip=['utcyearmonthdate(bulletin_date):T', 'utcyearmonthdate(datum_date):T', 'value']
         )
 
         heatmap = base.mark_rect().encode(
@@ -340,8 +337,7 @@ class DailyDeltas(AbstractChart):
                         table.c.delta_probable_cases,
                         table.c.delta_deaths]
         )
-        df = pd.read_sql_query(query, connection,
-                               parse_dates=["bulletin_date", "datum_date"])
+        df = util.read_sql_query(query, connection, parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
             'delta_confirmed_and_probable_cases': 'Confirmados y probables',
             'delta_confirmed_cases': 'Confirmados',
@@ -351,8 +347,8 @@ class DailyDeltas(AbstractChart):
         return pd.melt(df, ["bulletin_date", "datum_date"])
 
     def filter_data(self, df, bulletin_date):
-        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=7))
-        until_date = pd.to_datetime(bulletin_date)
+        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=7), utc=True)
+        until_date = pd.to_datetime(bulletin_date, utc=True)
         filtered = df.loc[(since_date < df['bulletin_date'])
                       & (df['bulletin_date'] <= until_date)]\
             .replace(0, np.nan)\
@@ -386,9 +382,9 @@ class WeekdayBias(AbstractChart):
         )
 
         heatmap = base.mark_rect().encode(
-            x=alt.X('day(datum_date):O', title=axis_title),
-            y=alt.Y('day(bulletin_date):O', title='Día boletín'),
-            tooltip=['variable', 'day(bulletin_date):O', 'day(datum_date):O',
+            x=alt.X('utcday(datum_date):O', title=axis_title, scale=alt.Scale(type='utc')),
+            y=alt.Y('utcday(bulletin_date):O', title='Día boletín', scale=alt.Scale(type='utc')),
+            tooltip=['variable', 'utcday(bulletin_date):O', 'utcday(datum_date):O',
                      alt.Tooltip(field='value',
                                  type='quantitative',
                                  aggregate='mean',
@@ -397,8 +393,8 @@ class WeekdayBias(AbstractChart):
 
         right = base.mark_bar().encode(
             x=alt.X('mean(value):Q', title=None, axis=None),
-            y=alt.Y('day(bulletin_date):O', title=None, axis=None),
-            tooltip=['variable', 'day(bulletin_date):O',
+            y=alt.Y('utcday(bulletin_date):O', title=None, axis=None),
+            tooltip=['variable', 'utcday(bulletin_date):O',
                      alt.Tooltip(field='value',
                                  type='quantitative',
                                  aggregate='mean',
@@ -406,9 +402,9 @@ class WeekdayBias(AbstractChart):
         )
 
         top = base.mark_bar().encode(
-            x=alt.X('day(datum_date):O', title=None, axis=None),
+            x=alt.X('utcday(datum_date):O', title=None, axis=None),
             y=alt.Y('mean(value):Q', title=None, axis=None),
-            tooltip = ['variable', 'day(datum_date):O',
+            tooltip = ['variable', 'utcday(datum_date):O',
                        alt.Tooltip(field='value',
                                    type='quantitative',
                                    aggregate='mean',
@@ -460,7 +456,7 @@ AND ba.bulletin_date > (
 	AND delta_probable_cases IS NOT NULL
 	AND delta_deaths IS NOT NULL)
 ORDER BY bulletin_date, datum_date""")
-        df = pd.read_sql_query(query, connection, parse_dates=['bulletin_date', 'datum_date'])
+        df = util.read_sql_query(query, connection, parse_dates=['bulletin_date', 'datum_date'])
         df = df.rename(columns={
             'delta_confirmed_and_probable_cases': 'Confirmados y probables',
             'delta_confirmed_cases': 'Confirmados',
@@ -470,7 +466,7 @@ ORDER BY bulletin_date, datum_date""")
         return pd.melt(df, ['bulletin_date', 'datum_date']).dropna()
 
     def filter_data(self, df, bulletin_date):
-        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=21))
-        until_date = pd.to_datetime(bulletin_date)
+        since_date = pd.to_datetime(bulletin_date - datetime.timedelta(days=21), utc=True)
+        until_date = pd.to_datetime(bulletin_date, utc=True)
         return df.loc[(since_date < df['bulletin_date'])
                           & (df['bulletin_date'] <= until_date)]

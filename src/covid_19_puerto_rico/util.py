@@ -32,3 +32,9 @@ def describe_frame(df):
     buf = io.StringIO()
     df.info(buf=buf)
     return buf.getvalue()
+
+def read_sql_query(query, connection, parse_dates=None):
+    if parse_dates is None:
+        parse_dates = []
+    params = { col: {'utc': True} for col in parse_dates }
+    return pd.read_sql_query(query, connection, parse_dates=params)
