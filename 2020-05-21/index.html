@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@midnucas">
+    <meta name="twitter:creator" content="@midnucas">
+    <meta name="twitter:title" content="Análisis COVID-19 Puerto Rico — 2020-05-21">
+    <meta name="twitter:description"
+          content="Análisis de rezagos de pruebas a partir de los boletines de COVID-19 del Departamento de Salud de Puerto Rico.">
+    <meta name="twitter:image"
+          content="https://sacundim.github.io/covid-19-puerto-rico/2020-05-21/2020-05-21_Lateness7Day.png">
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <title>Análisis boletín 2020-05-21</title>
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">covid-19-puerto-rico</a>
+      <button class="navbar-toggler"
+              type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      2020-05-21
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+                      <a class="dropdown-item" href="../2020-05-21/">2020-05-21</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-20/">2020-05-20</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-19/">2020-05-19</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-18/">2020-05-18</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-17/">2020-05-17</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-16/">2020-05-16</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-15/">2020-05-15</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-14/">2020-05-14</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-13/">2020-05-13</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-12/">2020-05-12</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-11/">2020-05-11</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-10/">2020-05-10</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-09/">2020-05-09</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-08/">2020-05-08</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-07/">2020-05-07</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-06/">2020-05-06</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-05/">2020-05-05</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-04/">2020-05-04</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-03/">2020-05-03</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-02/">2020-05-02</a>
+                      
+                      <a class="dropdown-item" href="../2020-05-01/">2020-05-01</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-30/">2020-04-30</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-29/">2020-04-29</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-28/">2020-04-28</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-27/">2020-04-27</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-26/">2020-04-26</a>
+                      
+                      <a class="dropdown-item" href="../2020-04-25/">2020-04-25</a>
+                      
+                  </div>
+              </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="https://github.com/sacundim/covid-19-puerto-rico">GitHub</a>
+              </li>
+          </ul>
+      </div>
+    </nav>
+
+    <div class="page_content">
+    
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="../js/vega-aux.js"></script>
+
+<div class="section" id="browserCompliance" style="display: none;">
+    <h1>Advertencia de compatibilidad</h1>
+
+    <p>Las visualizaciones de datos en esta página no son enteramente
+        compatibles con su navegador de web.  Como solución parcial,
+        he sustituído imágenes pregeneradas en un navegador que sí es
+        compatible, pero a costa de la experiencia óptima (e.g. mostrar
+        más detalle cuando apunta con el ratón a los datos).</p>
+
+    <p>Conocidos incompatibles:</p>
+    <ul>
+        <li>Safari en computadora (portatil o de escritorio)</li>
+        <li>Tabletas y teléfonos Apple (no importa cuál navegador)</li>
+    </ul>
+    <p>Conocidos compatibles:</p>
+    <ul>
+        <li>Chrome (en computadora)</li>
+        <li>Firefox (en computadora)</li>
+    </ul>
+
+    <p>La compatibilidad de otros navegadores se desconoce.</p>
+</div>
+
+<script type="text/javascript">
+    const bulletin_date = "2020-05-21";
+
+    if (!testCompliance()) {
+        var warning = document.getElementById("browserCompliance");
+        warning.style.display = "block";
+    }
+</script>
+
+<div class="section">
+    <h1>Cambio entre boletines consecutivos</h1>
+
+    <div id="DailyDeltas" class="chart"></div>
+    <script type="text/javascript" class="chart">
+      embedChart('DailyDeltas', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Una gráfica que muestra, para los boletines más recientes, los
+        resultados tomar los números de sus gráficas como esta:</p>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_confirmed.jpg"></p>
+
+    <p>...y restarle sus contrapartes del boletín anterior:</p>
+
+    <p><img class="source_chart" src="../source_material/2020-05-20/2020-05-20_confirmed.jpg"></p>
+
+    <p>Esto nos da un desglose aproximado, para cada boletín, de a qué fecha se le
+        atribuyeron los casos nuevos que reporta este.</p>
+
+    <p>Hay que notar que frecuentemente se ven fechas que salen números negativos.
+        La información que brinda el Departamento de Salud de Puerto Rico no deja claro
+        qué motiva esto en cada caso; algunas posibilidades podrían ser:</p>
+
+    <ul>
+        <li>Casos probables que luego se recibió resultado confirmatoria (positiva o negativa);</li>
+        <li>Llegada de resultado positivo más antiguo para la misma persona;</li>
+        <li>Corrección de errores clericales en los récords.</li>
+    </ul>
+
+    <p>La existencia de números negativos también complica la interpretación de este
+        modo: las fechas que dan positivos no sabemos si hubo resta de casos.  Una
+        fecha que diga que un boletín la subió por siete casos bien pudiera ser que
+        se registraron 8 casos nuevos y se restó uno.</p>
+</div>
+
+
+<div class="section">
+    <h1>Rezago de datos de cada boletín</h1>
+
+    <div id="LatenessDaily" class="chart"></div>
+    <script type="text/javascript">
+      embedChart('LatenessDaily', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Un estimado, para los boletines más recientes, de cuánto tiempo
+        atrás en promedio se tomaron las muestras que añade y las muertes
+        que reporta.</p>
+
+    <p>Este estimado se elabora a partir de los datos arriba de los cambios
+        entre boletines consecutivos. Por el asunto de los números negativos
+        en esos datos, no se puede esperar que estos rezagos estimados
+        sean los valores exactos que calcularíamos si tuvieramos mejor datos.</p>
+</div>
+
+
+<div class="section">
+    <h1>Tendencia de rezago de datos</h1>
+
+    <div id="Lateness7Day" class="chart"></div>
+    <script type="text/javascript">
+      embedChart('Lateness7Day', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Un estimado de rezagos similar al anterior, pero en vez de evaluar
+        los casos de cada boletín aparte, se agrupan en ventanas rodantes
+        de siete días.  O sea, la cifra que se reporta para cada fecha de
+        boletín abarca no solo los casos nuevos reportados en ese boletín,
+        sino también los seis días anteriores.</p>
+
+    <p>El ancho de ventana se fijó en siete días para eliminar los ciclos
+        semanales que son evidentes en los datos de fuente, como se aprecia
+        fácil en esta gráfica del boletín:</p>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_probable.jpg"></p>
+
+    <p>Las fechas como el 18, 19, 25 y 26 de abril, que reportan bien pocos
+        casos, es que son fines de semana.</p>
+
+    <p>Vale añadir que de los ocho puntos que muestran estas líneas, solo el
+        primero y el último son estadísticamente independientes.  Por ejemplo
+        la cifra más reciente y la anterior son calculadas a partir de ventanas
+        de siete días que coinciden en seis de estos.</p>
+</div>
+
+
+<div class="section">
+    <h1>Tendencias por día de semana</h1>
+
+    <div id="WeekdayBias" class="chart"></div>
+    <script type="text/javascript">
+      embedChart('WeekdayBias', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Casos de los 21 boletines más recientes, reportados con no más de 21 días de
+        rezago respecto a cada boletín, agrupados por la combinación de:</p>
+
+    <ul>
+        <li>Día de la semana que se tomó la muestra (o falleció el paciente);</li>
+        <li>Día de la semana del boletín en que se añadió el caso.</li>
+    </ul>
+
+    <p>La intensidad del color de cada cuadro refleja el promedio de cuántos casos
+        se registraron para esa combinación. Los histogramas marginales muestran
+        los promedios agrupados por la variable de un sólo eje.</p>
+
+    <p><b>ADVERTENCIAS:</b></p>
+    <ul>
+        <li>Los boletines siempre salen la mañana del día posterior al que cuyos datos
+            reportan.  Así que los datos que esta gráfica atribuye, por ejemplo, a boletín
+            de martes, corresponden a datos anunciados miércoles;</li>
+        <li>El análisis excluye casos reportados con más de 21 días de rezago, por
+            entenderse que estos reflejan eventos irregulares en vez de verdaderos
+            ciclos semanales;</li>
+        <li>El análisis solo contempla los 21 boletines más recientes.</li>
+    </ul>
+</div>
+
+
+<div class="section">
+    <h1>Curvas de casos acumulados por fecha de evento y de reporte</h1>
+
+    <div id="Cumulative"></div>
+    <script type="text/javascript">
+      embedChart('Cumulative', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Los números de casos acumulados para cada fecha, interpretándose esta tanto como:</p>
+
+    <dl>
+        <dt>Fecha de boletín</dt>
+        <dd>El número de casos que reportó el boletín de esa fecha.  Estos son los
+            números acumulados que se anuncian cada día y que más se comentan.</dd>
+        <dt>Fecha de muestra o actual de muerte</dt>
+        <dd>El número de casos que boletines posteriores le atribuyen a esa fecha,
+            a partir de agrupar los casos por fecha que se tomó la muestra o que
+            aconteció el fallecimiento.</dd>
+    </dl>
+
+    <p>En esta gráfica vale apreciar:</p>
+
+    <ul>
+        <li>Cómo el número verdadero de casos or muertes que se dieron para cada fecha
+            es siempre menor que el verdadero;</li>
+        <li>Los ciclos semanales en la administración de pruebas, más notable para los
+            casos probables;</li>
+        <li>La convergencia de las dos curvas de muertes al final es un artefacto de que
+            aún deben quedar muertes por reportar que sucedieron en fechas recientes.</li>
+    </ul>
+</div>
+
+
+<div class="section">
+    <h1>Tendencia de casos nuevos por fecha de evento (promedios 7 días)</h1>
+
+    <div id="NewCases"></div>
+    <script type="text/javascript">
+      embedChart('NewCases', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>La tendencia de los casos nuevos y las muertes, vista por medio de:</p>
+
+    <ul>
+        <li>La fecha en que se tomó la muestra o se dio el fallecimiento (no
+            la fecha que se anunció el caso, como hacen muchos otros análisis);</li>
+        <li>Promedios en ventanas de siete días que terminan en dicha fecha.</li>
+    </ul>
+
+    <p>Las líneas sólidas representan los promedios.  Los círculos semitransparentes
+        son los números crudos de casos nuevos para cada fecha, a partir de los
+        cuales se calculan estos promedios.  Se usa promedio por ventana de siete
+        días para eliminar el efecto de los ciclos semanales.</p>
+
+    <p><b>ADVERTENCIA:</b> Caídas súbitas al final de cada línea lo más probable
+        no son reales, si no que más bien son artefactos de los rezagos—i.e., no
+        han se han incorporado datos para esas fechas.</p>
+</div>
+
+
+<div class="section">
+    <h1>Tiempos de duplicación de casos por fecha de evento</h1>
+
+    <div id="Doubling" class="chart"></div>
+    <script type="text/javascript">
+      embedChart('Doubling', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Las tendencias de la velocidad a la que han crecido los casos, expresadas
+        en términos de tiempos de duplicación constante (duplicación cada dos días,
+        tres días, cuatro días, etc.), y por ventanas de anchos de 7, 14 y 21 días.</p>
+
+    <p>Esto es, para cada fecha, el ancho de ventana <i>n</i> dividido entre la subida del
+        logaritmo base entre el valor acumulado hace <i>n</i> días y esa fecha.</p>
+
+    <p>Si los datos de base no son una indicación fiable de la propagación de la
+        epidemia, pues esta gráfica tampoco lo es; lo que nos dice es qué sería la
+        verdad si los datos fueran de verdad.  ¯\_(ツ)_/¯</p>
+</div>
+
+<div class="section">
+    <h1>Terminología</h1>
+
+    <h3>Fecha de boletín</h3>
+    <p>Las fechas que aparecen a la cabecera de los boletines que emite a diario
+        el Departamento de Salud de Puerto Rico sobre los casos conocidos de COVID-19
+        en Puerto Rico.  Estos boletines recopilan datos <b>hasta la fecha anterior
+        a cuando se publican</b>; por ejemplo, el boletín que dice 2 de mayo se publicó
+        el 3 de mayo.</p>
+
+    <p><b>ADVERTENCIA:</b> Muchas bases de datos y reportajes usan la fecha que se publicó
+        el boletín en vez de la fecha que dice este, y por eso atribuyen los mismos números
+        aquí al próximo día.</p>
+
+
+    <h3>Fecha de evento</h3>
+    <p>La fecha en que en realidad sucedió un evento, según el boletín.  Para las cifras
+        de muertes, esta es la fecha en que sucedió la muerte.  Para casos confirmados y
+        probables, esto es la fecha en que se tomó muestra que se sometió a prueba.  Los
+        boletines no aclaran qué fecha se usa para pacientes a los cuales se les administró
+        más de una prueba.</p>
+
+    <p><b>ADVERTENCIA:</b> Muchas bases de datos y reportajes usan la fecha de boletín o
+        anuncio en vez de la de evento, y por eso no coinciden con los resultados que
+        da este análisis.  Dar el análisis por fecha de evento en vez de boletín o anuncio
+        es lo que motiva este proyecto.</p>
+
+    <h3>Caso confirmado</h3>
+    <p>Término que el Departamento de Salud de Puerto Rico usa para denominar a un
+        paciente único que ha dado positivo a una prueba molecular (PCR) de SARS-CoV-2.</p>
+
+    <h3>Caso probable</h3>
+    <p>Término que el Departamento de Salud de Puerto Rico usa para denominar a un
+        paciente único que ha dado positivo a una prueba serológica ("rápida").</p>
+</div>
+
+<div class="section">
+    <h1>Datos fuente para 2020-05-21</h1>
+
+    Estas son las imágenes de los boletines del Departamento de Salud que
+    se usaron para elaborar este análisis.
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_announcement.jpg"></p>
+
+    <h3>Casos únicos confirmados y probables 2020-05-21 (vs. 2020-05-20)</h3>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_confirmed_and_probable.jpg"></p>
+    <p><img class="source_chart" src="../source_material/2020-05-20/2020-05-20_confirmed_and_probable.jpg"></p>
+
+    <h3>Casos únicos confirmados 2020-05-21 (vs. 2020-05-20)</h3>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_confirmed.jpg"></p>
+    <p><img class="source_chart" src="../source_material/2020-05-20/2020-05-20_confirmed.jpg"></p>
+
+    <h3>Casos únicos probables 2020-05-21 (vs. 2020-05-20)</h3>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_probable.jpg"></p>
+    <p><img class="source_chart" src="../source_material/2020-05-20/2020-05-20_probable.jpg"></p>
+
+    <h3>Muertes 2020-05-21 (vs. 2020-05-20)</h3>
+
+    <p><img class="source_chart" src="../source_material/2020-05-21/2020-05-21_deaths.jpg"></p>
+    <p><img class="source_chart" src="../source_material/2020-05-20/2020-05-20_deaths.jpg"></p>
+</div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</body>
+</html>
