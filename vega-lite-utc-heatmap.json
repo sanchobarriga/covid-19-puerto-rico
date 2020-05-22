@@ -1,0 +1,1262 @@
+{
+  "config": {
+    "axis": {
+      "labelFontSize": 14,
+      "titleFontSize": 14
+    },
+    "header": {
+      "labelFontSize": 14,
+      "titleFontSize": 14
+    },
+    "legend": {
+      "labelFontSize": 14,
+      "titleFontSize": 14
+    },
+    "title": {
+      "align": "center",
+      "fontSize": 20,
+      "offset": 15
+    }
+  },
+  "vconcat": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "color": {
+          "type": "quantitative",
+          "aggregate": "mean",
+          "field": "value",
+          "scale": {
+            "scheme": "oranges"
+          },
+          "title": null
+        },
+        "tooltip": [
+          {
+            "type": "nominal",
+            "field": "variable"
+          },
+          {
+            "type": "ordinal",
+            "field": "datum_date",
+            "timeUnit": "utcday"
+          },
+          {
+            "type": "quantitative",
+            "aggregate": "mean",
+            "field": "value",
+            "format": ".2f"
+          }
+        ],
+        "x": {
+          "type": "ordinal",
+          "axis": null,
+          "field": "datum_date",
+          "timeUnit": "utcday",
+          "title": null
+        },
+        "y": {
+          "type": "quantitative",
+          "aggregate": "mean",
+          "axis": null,
+          "field": "value",
+          "title": null
+        }
+      },
+      "height": 40,
+      "transform": [
+        {
+          "filter": "(datum.variable === 'Confirmados')"
+        }
+      ],
+      "width": 160
+    },
+    {
+      "hconcat": [
+        {
+          "mark": "rect",
+          "encoding": {
+            "color": {
+              "type": "quantitative",
+              "aggregate": "mean",
+              "field": "value",
+              "scale": {
+                "scheme": "oranges"
+              },
+              "title": null
+            },
+            "tooltip": [
+              {
+                "type": "nominal",
+                "field": "variable"
+              },
+              {
+                "type": "ordinal",
+                "field": "bulletin_date",
+                "timeUnit": "utcday"
+              },
+              {
+                "type": "ordinal",
+                "field": "datum_date",
+                "timeUnit": "utcday"
+              },
+              {
+                "type": "quantitative",
+                "aggregate": "mean",
+                "field": "value",
+                "format": ".2f"
+              }
+            ],
+            "x": {
+              "type": "ordinal",
+              "field": "datum_date",
+              "timeUnit": "utcday",
+              "title": "Día muestra"
+            },
+            "y": {
+              "type": "ordinal",
+              "field": "bulletin_date",
+              "timeUnit": "utcday",
+              "title": "Día boletín"
+            }
+          },
+          "height": 160,
+          "transform": [
+            {
+              "filter": "(datum.variable === 'Confirmados')"
+            }
+          ],
+          "width": 160
+        },
+        {
+          "mark": "bar",
+          "encoding": {
+            "color": {
+              "type": "quantitative",
+              "aggregate": "mean",
+              "field": "value",
+              "scale": {
+                "scheme": "oranges"
+              },
+              "title": null
+            },
+            "tooltip": [
+              {
+                "type": "nominal",
+                "field": "variable"
+              },
+              {
+                "type": "ordinal",
+                "field": "bulletin_date",
+                "timeUnit": "utcday"
+              },
+              {
+                "type": "quantitative",
+                "aggregate": "mean",
+                "field": "value",
+                "format": ".2f"
+              }
+            ],
+            "x": {
+              "type": "quantitative",
+              "aggregate": "mean",
+              "axis": null,
+              "field": "value",
+              "title": null
+            },
+            "y": {
+              "type": "ordinal",
+              "axis": null,
+              "field": "bulletin_date",
+              "timeUnit": "utcday",
+              "title": null
+            }
+          },
+          "height": 160,
+          "transform": [
+            {
+              "filter": "(datum.variable === 'Confirmados')"
+            }
+          ],
+          "width": 40
+        }
+      ],
+      "spacing": 3
+    }
+  ],
+  "data": {"name": "data-14fc776c68a55a9006b9a8a1f713c6a9"},
+  "spacing": 3,
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "datasets": {
+    "data-14fc776c68a55a9006b9a8a1f713c6a9": [
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-15T00:00:00",
+        "variable": "Confirmados",
+        "value": 9
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-16T00:00:00",
+        "variable": "Confirmados",
+        "value": 4
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-17T00:00:00",
+        "variable": "Confirmados",
+        "value": 8
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-18T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-19T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 7
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 11
+      },
+      {
+        "bulletin_date": "2020-04-29T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 5
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-16T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-17T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-18T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-19T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-04-30T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-17T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-18T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-19T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 5
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-01T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-18T00:00:00",
+        "variable": "Confirmados",
+        "value": -1
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-19T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 6
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 4
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-02T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-19T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-03T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-20T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-04T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-21T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-05T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-22T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-06T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-23T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 7
+      },
+      {
+        "bulletin_date": "2020-05-07T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-24T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": -1
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-08T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-04-25T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-09T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-10T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 4
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-04-27T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-11T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-04-28T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-12T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-04-29T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": -1
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-13T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-04-30T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 7
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 5
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-01T00:00:00",
+        "variable": "Confirmados",
+        "value": -1
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": -1
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 8
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00",
+        "datum_date": "2020-05-09T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-02T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 5
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00",
+        "datum_date": "2020-05-09T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-03T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 4
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-09T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00",
+        "datum_date": "2020-05-11T00:00:00",
+        "variable": "Confirmados",
+        "value": 4
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-04T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-09T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-11T00:00:00",
+        "variable": "Confirmados",
+        "value": 3
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-12T00:00:00",
+        "variable": "Confirmados",
+        "value": 2
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00",
+        "datum_date": "2020-05-13T00:00:00",
+        "variable": "Confirmados",
+        "value": 1
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-05T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-06T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-07T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-08T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-09T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-11T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-12T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00",
+        "datum_date": "2020-05-13T00:00:00",
+        "variable": "Confirmados",
+        "value": 0
+      }
+    ]
+  }
+}

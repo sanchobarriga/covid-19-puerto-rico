@@ -61,7 +61,11 @@ class Cumulative(AbstractChart):
                                   'Casos probables (fecha muestra)',
                                   'Muertes (fecha muerte)',
                                   'Muertes (fecha boletín)']),
-            tooltip=['utcyearmonthdate(datum_date):T', 'variable', 'value']
+            tooltip=[alt.Tooltip('datum_date',
+                                 type='temporal',
+                                 timeUnit='utcyearmonthdate',
+                                 scale=alt.Scale(type='utc')),
+                     'variable', 'value']
         ).properties(
             width=575, height=275
         )
@@ -102,7 +106,11 @@ class NewCases(AbstractChart):
             alt.datum.value > 0
         ).mark_point(opacity=0.5).encode(
             y=alt.Y('value:Q', title=None, scale=alt.Scale(type='log')),
-            tooltip=['utcyearmonthdate(datum_date):T', 'variable', 'value']
+            tooltip=[alt.Tooltip('datum_date',
+                                 type='temporal',
+                                 timeUnit='utcyearmonthdate',
+                                 scale=alt.Scale(type='utc')),
+                     'variable', 'value']
         )
 
         average = base.transform_window(
