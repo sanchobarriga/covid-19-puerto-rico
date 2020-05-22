@@ -1,0 +1,85 @@
+{
+  "config": {
+    "axis": {"labelFontSize": 14, "titleFontSize": 14},
+    "header": {"labelFontSize": 14, "titleFontSize": 14},
+    "legend": {"labelFontSize": 14, "titleFontSize": 14},
+    "title": {"align": "center", "fontSize": 20, "offset": 15}
+  },
+  "data": {"name": "data-368fe9d4cf2556c2da22777d8756deb1"},
+  "mark": {"type": "line", "point": {"size": 50}, "strokeWidth": 3},
+  "encoding": {
+    "color": {
+      "type": "nominal",
+      "field": "variable",
+      "legend": null,
+      "sort": [
+        "Confirmados y probables",
+        "Confirmados",
+        "Probables",
+        "Muertes"
+      ]
+    },
+    "tooltip": [
+      {"type": "nominal", "field": "variable"},
+      {"type": "ordinal", "field": "bulletin_date", "timeUnit": "utcyearmonthdate"},
+      {"type": "quantitative", "field": "value", "format": ".1f"}
+    ],
+    "x": {
+      "type": "ordinal",
+      "axis": {"format": "%d/%m", "titlePadding": 10},
+      "field": "bulletin_date",
+      "timeUnit": "utcyearmonthdate",
+      "title": "Fecha boletín"
+    },
+    "y": {
+      "type": "quantitative",
+      "field": "value",
+      "title": "Rezago (días)"
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "datasets": {
+    "data-368fe9d4cf2556c2da22777d8756deb1": [
+      {
+        "bulletin_date": "2020-05-13T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 9.483333333333333
+      },
+      {
+        "bulletin_date": "2020-05-14T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 9.35593220338983
+      },
+      {
+        "bulletin_date": "2020-05-15T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 15.4875
+      },
+      {
+        "bulletin_date": "2020-05-16T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 19.242990654205606
+      },
+      {
+        "bulletin_date": "2020-05-17T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 21.49645390070922
+      },
+      {
+        "bulletin_date": "2020-05-18T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 21.455172413793104
+      },
+      {
+        "bulletin_date": "2020-05-19T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 21.37323943661972
+      },
+      {
+        "bulletin_date": "2020-05-20T00:00:00+00:00",
+        "variable": "Confirmados",
+        "value": 21.02857142857143
+      }
+    ]
+  }
+}
