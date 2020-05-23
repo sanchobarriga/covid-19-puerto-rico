@@ -263,7 +263,7 @@ class Doubling(AbstractChart):
                     title='Fecha del evento',
                     axis=alt.Axis(format='%d/%m')),
             y=alt.Y('value', title=None,
-                    scale=alt.Scale(type='log', domain=(1, 100))),
+                    scale=alt.Scale(type='log', domain=(1, 128))),
             color=alt.Color('variable', legend=None)
         ).properties(
             width=175,
@@ -405,7 +405,7 @@ class WeekdayBias(AbstractChart):
             alt.datum.value > 0
         ).encode(
             color=alt.Color('sum(value):Q', title=None,
-                            scale=alt.Scale(type='log', scheme=color_scheme))
+                            scale=alt.Scale(type='log', base=2, scheme=color_scheme))
         )
 
         heatmap = base.mark_rect().encode(
