@@ -117,7 +117,8 @@ class NewCases(AbstractChart):
         return (average + scatter).encode(
             color=alt.Color('variable', title=None,
                             legend=alt.Legend(orient="top", labelLimit=250),
-                            sort=['Confirmados',
+                            sort=['Pruebas moleculares (total)',
+                                  'Confirmados',
                                   'Probables',
                                   'Muertes'])
         ).properties(
@@ -130,10 +131,12 @@ class NewCases(AbstractChart):
                         table.c.datum_date,
                         table.c.confirmed_cases,
                         table.c.probable_cases,
-                        table.c.deaths])
+                        table.c.deaths,
+                        table.c.molecular_tests])
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
+            'molecular_tests': 'Pruebas moleculares (total)',
             'confirmed_cases': 'Confirmados',
             'probable_cases': 'Probables',
             'deaths': 'Muertes'
