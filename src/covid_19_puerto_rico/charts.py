@@ -6,7 +6,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 import sqlalchemy
-from sqlalchemy.sql import select, text
+from sqlalchemy.sql import select, text, cast
+from sqlalchemy.types import Float
 from . import util
 
 class AbstractChart(ABC):
@@ -143,6 +144,41 @@ class NewCases(AbstractChart):
             'confirmed_cases': 'Confirmados',
             'probable_cases': 'Probables',
             'deaths': 'Muertes'
+        })
+        return pd.melt(df, ["bulletin_date", "datum_date"])
+
+
+class TestsPerCapita(AbstractChart):
+    def make_chart(self, df):
+        return alt.Chart(df).mark_line(point=True).encode(
+            x=alt.X('yearmonthdate(datum_date):T', title=None,
+                    axis=alt.Axis(format='%d/%m')),
+            y=alt.Y('value', title=None),
+            tooltip=['datum_date', 'variable',
+                     alt.Tooltip(field='value',
+                                 type='quantitative',
+                                 format=".1f")]
+        ).properties(
+            width=575, height=175
+        ).facet(
+            row=alt.Row('variable', title=None)
+        ).resolve_scale(
+            y='independent'
+        )
+
+    def fetch_data(self, connection):
+        table = sqlalchemy.Table('cumulative_data', self.metadata,
+                                 schema='products', autoload=True)
+        query = select([table.c.bulletin_date,
+                        table.c.datum_date,
+                        (table.c.molecular_tests / 3193.694).label("tests_per_thousand"),
+                        (cast(table.c.molecular_tests, Float)
+                         / cast(table.c.confirmed_cases, Float)).label('tests_per_case')])
+        df = pd.read_sql_query(query, connection,
+                               parse_dates=["bulletin_date", "datum_date"])
+        df = df.rename(columns={
+            'tests_per_thousand': 'Pruebas por 1,000',
+            'tests_per_case': 'Pruebas por caso confirmado',
         })
         return pd.melt(df, ["bulletin_date", "datum_date"])
 

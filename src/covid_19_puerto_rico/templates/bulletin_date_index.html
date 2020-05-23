@@ -238,6 +238,59 @@
 
 
 <div class="section">
+    <h1>Pruebas moleculares por caso confirmado (fecha de muestra)</h1>
+
+    <div id="TestsPerCapita"></div>
+    <script type="text/javascript">
+      embedChart('TestsPerCapita', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>Un cálculo de la tendencia de la cantidad de pruebas moleculares cuando se
+        divide entre:</p>
+
+    <ul>
+        <li>Cada mil habitantes;</li>
+        <li>El número de casos confirmados por muestras en la misma fecha.</li>
+    </ul>
+
+    <p>La página Our World in Data, que recopila datos y análisis de la pandemia a nivel global,
+        <a href="https://ourworldindata.org/what-can-data-on-testing-tell-us-about-the-pandemic">recomienda
+            el segundo cálculo</a> como herramienta para desencubrir países en que la cantidad de pruebas,
+        a pesar de ser comparativamente alta per cápita, en realidad no da a basto en relación al tamaño del
+        brote que experimentan.  Como explica la página:</p>
+
+    <blockquote>
+        <p>En términos de cobertura de pruebas el Reino Unido parece estar adelante
+            de Taiwán, con por lo menos el doble de pruebas por mil personas, a la
+            fecha del 11 de abril.</p>
+
+        <p>Pero en la misma fecha habían 60 veces más casos confirmados por millón en
+            el Reino Unido que en Taiwan — 1,035 por millón y 16 casos por millón
+            respectivamente.</p>
+
+        <p>Así que mientras que la cantidad de pruebas relativo a tamaño de población
+            es mayor en el Reino Unido, la cantidad de pruebas <em>relativo al tamaño
+            del brote</em> es mucho, mucho mayor en Taiwán.</p>
+
+        <p>Al 11 de abril, en Taiwan se confirmaba un caso por cada 120 pruebas.  En
+            el Reino Unido, un caso se confirmaba en menos de cada cuatro pruebas.</p>
+
+        <p>[...] Un país que realiza pocas pruebas por cada caso que confirma no está
+            administrando suficientes para que el número de casos confirmados pinte
+            un cuadro confiable de la verdadera dispersión del virus.  Mientras que
+            las personas con los síntomas más severos pudieran habérseles dado
+            pruebas en tales países, probablemente hay muchísimas más personas con
+            síntomas leves o nulos que nunca se les realizó prueba.</p>
+    </blockquote>
+
+    <p>Ver también <a href="https://ourworldindata.org/grapher/number-of-covid-19-tests-per-confirmed-case?time=2020-02-07..">
+        esta gráfica interactiva de Our World in Data de la misma medida</a>.</p>
+</div>
+
+
+<div class="section">
     <h1>Tiempos de duplicación por fecha de evento</h1>
 
     <div id="Doubling" class="chart"></div>
