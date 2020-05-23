@@ -238,11 +238,11 @@
 
 
 <div class="section">
-    <h1>Pruebas moleculares por caso confirmado (fecha de muestra)</h1>
+    <h1>Pruebas moleculares por caso confirmado (acumulado, fecha de muestra)</h1>
 
-    <div id="TestsPerCapita"></div>
+    <div id="CumulativeTestsPerCapita"></div>
     <script type="text/javascript">
-      embedChart('TestsPerCapita', bulletin_date);
+      embedChart('CumulativeTestsPerCapita', bulletin_date);
     </script>
 
     <h3>¿Qué es esto?</h3>
@@ -289,6 +289,20 @@
         esta gráfica interactiva de Our World in Data de la misma medida</a>.</p>
 </div>
 
+
+<div class="section">
+    <h1>Pruebas moleculares por caso confirmado (promedio 7 días, fecha de muestra)</h1>
+
+    <div id="NewTestsPerCapita"></div>
+    <script type="text/javascript">
+      embedChart('NewTestsPerCapita', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>El mismo cálculo que la anterior, pero por promedios de pruebas y casos nuevos
+        en ventanas de siete días.</p>
+</div>
 
 <div class="section">
     <h1>Tiempos de duplicación por fecha de evento</h1>

@@ -10,6 +10,7 @@ from sqlalchemy.sql import select, text, cast
 from sqlalchemy.types import Float
 from . import util
 
+
 class AbstractChart(ABC):
     def __init__(self, engine, output_dir,
                  output_formats=frozenset(['json'])):
@@ -148,20 +149,20 @@ class NewCases(AbstractChart):
         return pd.melt(df, ["bulletin_date", "datum_date"])
 
 
-class TestsPerCapita(AbstractChart):
+class CumulativeTestsPerCapita(AbstractChart):
     def make_chart(self, df):
         return alt.Chart(df).mark_line(point=True).encode(
             x=alt.X('yearmonthdate(datum_date):T', title=None,
                     axis=alt.Axis(format='%d/%m')),
-            y=alt.Y('value', title=None),
-            tooltip=['datum_date', 'variable',
-                     alt.Tooltip(field='value',
+            y=alt.Y(alt.repeat('row'), type='quantitative'),
+            tooltip=['datum_date',
+                     alt.Tooltip(field=alt.repeat('row'),
                                  type='quantitative',
                                  format=".1f")]
         ).properties(
             width=575, height=175
-        ).facet(
-            row=alt.Row('variable', title=None)
+        ).repeat(
+            row=['Pruebas por 1,000', 'Pruebas por caso confirmado']
         ).resolve_scale(
             y='independent'
         )
@@ -176,11 +177,59 @@ class TestsPerCapita(AbstractChart):
                          / cast(table.c.confirmed_cases, Float)).label('tests_per_case')])
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
-        df = df.rename(columns={
+        return df.rename(columns={
             'tests_per_thousand': 'Pruebas por 1,000',
             'tests_per_case': 'Pruebas por caso confirmado',
         })
-        return pd.melt(df, ["bulletin_date", "datum_date"])
+
+
+class NewTestsPerCapita(AbstractChart):
+    def make_chart(self, df):
+        return alt.Chart(df).mark_line(point=True).encode(
+            x=alt.X('yearmonthdate(datum_date):T', title=None,
+                    axis=alt.Axis(format='%d/%m')),
+            y=alt.Y(alt.repeat('row'), type='quantitative'),
+            tooltip=['datum_date',
+                     alt.Tooltip(field=alt.repeat('row'),
+                                 type='quantitative',
+                                 format=".1f")]
+        ).properties(
+            width=575, height=175
+        ).repeat(
+            row=['Pruebas por millón', 'Pruebas por caso confirmado']
+        ).resolve_scale(
+            y='independent'
+        )
+
+    def fetch_data(self, connection):
+        query = text("""WITH raw AS (
+	SELECT 
+		bulletin_date,
+		datum_date,
+		count(datum_date) OVER datum AS count,
+		CAST(sum(molecular_tests) OVER datum AS DOUBLE PRECISION) 
+			/ count(datum_date) OVER datum molecular_tests,
+		cast(sum(molecular_tests) OVER datum AS DOUBLE PRECISION)
+			/ nullif(sum(confirmed_cases) OVER datum, 0)
+			AS tests_per_confirmed_case
+	FROM bitemporal b
+	WHERE bulletin_date = '2020-05-20'
+	WINDOW datum AS (ORDER BY datum_date RANGE '6 day' PRECEDING)
+)
+SELECT 
+	bulletin_date,
+	datum_date,
+	molecular_tests / 3.193694 AS molecular_tests_per_million,
+	tests_per_confirmed_case
+FROM raw 
+WHERE count = 7
+ORDER BY bulletin_date, datum_date""")
+        df = pd.read_sql_query(query, connection,
+                               parse_dates=["bulletin_date", "datum_date"])
+        return df.rename(columns={
+            'molecular_tests_per_million': 'Pruebas por millón',
+            'tests_per_confirmed_case': 'Pruebas por caso confirmado'
+        })
 
 
 class AbstractLateness(AbstractChart):

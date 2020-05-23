@@ -47,7 +47,8 @@ def main():
         output_formats = frozenset(['json'])
 
     targets = [
-        charts.TestsPerCapita(engine, args.output_dir, output_formats),
+        charts.NewTestsPerCapita(engine, args.output_dir, output_formats),
+        charts.CumulativeTestsPerCapita(engine, args.output_dir, output_formats),
         charts.WeekdayBias(engine, args.output_dir, output_formats),
         charts.Cumulative(engine, args.output_dir, output_formats),
         charts.NewCases(engine, args.output_dir, output_formats),
