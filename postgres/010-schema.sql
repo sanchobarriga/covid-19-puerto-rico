@@ -375,7 +375,10 @@ SELECT
     	AS cumulative_probable_cases,
     CAST(window_size.days AS NUMERIC)
     	/ NULLIF(log2(cumulative_deaths) - log2(LAG(cumulative_deaths, window_size.days) OVER datum), 0)
-    	AS cumulative_deaths
+    	AS cumulative_deaths,
+    CAST(window_size.days AS NUMERIC)
+    	/ NULLIF(log2(cumulative_molecular_tests) - log2(LAG(cumulative_molecular_tests, window_size.days) OVER datum), 0)
+    	AS cumulative_molecular_tests
 FROM bitemporal_agg
 CROSS JOIN (VALUES (7), (14), (21)) AS window_size (days)
 WINDOW datum AS (

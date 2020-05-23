@@ -72,23 +72,23 @@ class Cumulative(AbstractChart):
                                  schema='products', autoload=True)
         query = select([table.c.bulletin_date,
                         table.c.datum_date,
+                        table.c.molecular_tests,
                         table.c.confirmed_cases,
                         table.c.probable_cases,
                         table.c.positive_results,
                         table.c.announced_cases,
                         table.c.deaths,
-                        table.c.announced_deaths,
-                        table.c.molecular_tests])
+                        table.c.announced_deaths])
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
+            'molecular_tests': 'Pruebas moleculares (fecha muestra)',
             'confirmed_cases': 'Casos confirmados (fecha muestra)',
             'probable_cases': 'Casos probables (fecha muestra)',
             'positive_results': 'Pruebas positivas (fecha boletín)',
             'announced_cases': 'Casos (fecha boletín)',
             'deaths': 'Muertes (fecha muerte)',
-            'announced_deaths': 'Muertes (fecha boletín)',
-            'molecular_tests': 'Pruebas moleculares (fecha muestra)'
+            'announced_deaths': 'Muertes (fecha boletín)'
         })
         return pd.melt(df, ["bulletin_date", "datum_date"])
 
@@ -139,7 +139,7 @@ class NewCases(AbstractChart):
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
-            'molecular_tests': 'Pruebas moleculares (total)',
+            'molecular_tests': 'Pruebas moleculares',
             'confirmed_cases': 'Confirmados',
             'probable_cases': 'Probables',
             'deaths': 'Muertes'
@@ -263,7 +263,7 @@ class Doubling(AbstractChart):
                     title='Fecha del evento',
                     axis=alt.Axis(format='%d/%m')),
             y=alt.Y('value', title=None,
-                    scale=alt.Scale(type='log', domain=(1, 128))),
+                    scale=alt.Scale(type='log', domain=(1, 100))),
             color=alt.Color('variable', legend=None)
         ).properties(
             width=175,
@@ -271,7 +271,7 @@ class Doubling(AbstractChart):
 
         ).facet(
             row=alt.Row('variable', title=None,
-                        sort=['Confirmados y probables',
+                        sort=['Pruebas moleculares',
                               'Confirmados',
                               'Probables',
                               'Muertes']),
@@ -284,7 +284,7 @@ class Doubling(AbstractChart):
         query = select([table.c.datum_date,
                         table.c.bulletin_date,
                         table.c.window_size_days,
-                        table.c.cumulative_confirmed_and_probable_cases,
+                        table.c.cumulative_molecular_tests,
                         table.c.cumulative_confirmed_cases,
                         table.c.cumulative_probable_cases,
                         table.c.cumulative_deaths]
@@ -292,7 +292,7 @@ class Doubling(AbstractChart):
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
-            'cumulative_confirmed_and_probable_cases': 'Confirmados y probables',
+            'cumulative_molecular_tests': 'Pruebas moleculares',
             'cumulative_confirmed_cases': 'Confirmados',
             'cumulative_probable_cases': 'Probables',
             'cumulative_deaths': 'Muertes'
