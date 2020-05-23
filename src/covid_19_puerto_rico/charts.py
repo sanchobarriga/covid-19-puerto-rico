@@ -55,7 +55,8 @@ class Cumulative(AbstractChart):
             y=alt.Y('value', title=None, scale=alt.Scale(type='log')),
             color=alt.Color('variable', title=None,
                             legend=alt.Legend(orient="top", labelLimit=250, columns=2),
-                            sort=['Casos confirmados (fecha muestra)',
+                            sort=['Pruebas moleculares (fecha muestra)',
+                                  'Casos confirmados (fecha muestra)',
                                   'Pruebas positivas (fecha boletín)',
                                   'Casos (fecha boletín)',
                                   'Casos probables (fecha muestra)',
@@ -63,7 +64,7 @@ class Cumulative(AbstractChart):
                                   'Muertes (fecha boletín)']),
             tooltip=['datum_date', 'variable', 'value']
         ).properties(
-            width=575, height=275
+            width=600, height=400
         )
 
     def fetch_data(self, connection):
@@ -76,7 +77,8 @@ class Cumulative(AbstractChart):
                         table.c.positive_results,
                         table.c.announced_cases,
                         table.c.deaths,
-                        table.c.announced_deaths])
+                        table.c.announced_deaths,
+                        table.c.molecular_tests])
         df = pd.read_sql_query(query, connection,
                                parse_dates=["bulletin_date", "datum_date"])
         df = df.rename(columns={
@@ -85,7 +87,8 @@ class Cumulative(AbstractChart):
             'positive_results': 'Pruebas positivas (fecha boletín)',
             'announced_cases': 'Casos (fecha boletín)',
             'deaths': 'Muertes (fecha muerte)',
-            'announced_deaths': 'Muertes (fecha boletín)'
+            'announced_deaths': 'Muertes (fecha boletín)',
+            'molecular_tests': 'Pruebas moleculares (fecha muestra)'
         })
         return pd.melt(df, ["bulletin_date", "datum_date"])
 
