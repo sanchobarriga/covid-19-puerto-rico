@@ -40,9 +40,11 @@
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                      role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Boletines regulares
+                      Casos y muertes
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+                      <a class="dropdown-item" href="../2020-05-25/">2020-05-25</a>
                       
                       <a class="dropdown-item" href="../2020-05-24/">2020-05-24</a>
                       
@@ -107,7 +109,7 @@
                   </div>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="../molecular_tests/">Moleculares 2020-05-20</a>
+                  <a class="nav-link" href="../molecular_tests/">Moleculares</a>
               </li>
           </ul>
           <ul class="navbar-nav ml-auto">
@@ -161,16 +163,16 @@
 </script>
 
 <div class="section">
-    <h1>Cambio entre boletines consecutivos</h1>
+    <h1>Cambio entre boletín actual y anterior</h1>
 
-    <div id="DailyDeltas" class="chart"></div>
+    <div id="CurrentDeltas" class="chart"></div>
     <script type="text/javascript" class="chart">
-      embedChart('DailyDeltas', bulletin_date);
+      embedChart('CurrentDeltas', bulletin_date);
     </script>
 
     <h3>¿Qué es esto?</h3>
 
-    <p>Una gráfica que muestra, para los boletines más recientes, los
+    <p>Una gráfica que muestra, para los dos boletines más recientes, los
         resultados tomar los números de sus gráficas como esta:</p>
 
     <p><img class="source_chart" src="../source_material/2020-05-13/2020-05-13_confirmed.jpg"></p>
@@ -179,7 +181,7 @@
 
     <p><img class="source_chart" src="../source_material/2020-05-12/2020-05-12_confirmed.jpg"></p>
 
-    <p>Esto nos da un desglose aproximado, para cada boletín, de a qué fecha se le
+    <p>Esto nos da un desglose aproximado, para el nuevo boletín, de a qué fecha se le
         atribuyeron los casos nuevos que reporta este.</p>
 
     <p>Hay que notar que frecuentemente se ven fechas que salen números negativos.
@@ -196,6 +198,20 @@
         modo: las fechas que dan positivos no sabemos si hubo resta de casos.  Una
         fecha que diga que un boletín la subió por siete casos bien pudiera ser que
         se registraron 8 casos nuevos y se restó uno.</p>
+</div>
+
+<div class="section">
+    <h1>Cambios entre boletines recientes</h1>
+
+    <div id="DailyDeltas" class="chart"></div>
+    <script type="text/javascript" class="chart">
+      embedChart('DailyDeltas', bulletin_date);
+    </script>
+
+    <h3>¿Qué es esto?</h3>
+
+    <p>El mismo análisis que la gráfica anterior, pero para los 14 boletines
+        más recientes, cosa que require hacer los númeritos bien chiquititos.</p>
 </div>
 
 
